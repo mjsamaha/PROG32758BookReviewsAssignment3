@@ -22,6 +22,8 @@ Team Members:
 
 ## Task Distribution
 **Matthew**
+- Models: Book and Reviews
+- Data: Book and Reviews -> Repository Interfaces
 
 **Sebastian**
 
