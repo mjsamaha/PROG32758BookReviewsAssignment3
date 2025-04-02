@@ -4,7 +4,8 @@ Samaha, Matthew
 Shingala, Sahil Pradip
 
 ## Colloboration
-Utilizied IntelliJ plugin: Code With Me
+GitHub
+Link:https://github.com/mjsamaha/PROG32758BookReviewsAssignment3
 
 ### Dependencies
 - Spring Web
@@ -14,5 +15,18 @@ Utilizied IntelliJ plugin: Code With Me
 - Spring Data JPA
 - H2 Database
 - Rest Repositories
+
+
+
+## Setup for team
+IntelliJ and go to File → New → Project from Version Control.
+Paste the repository URL: https://github.com/mjsamaha/PROG32758BookReviewsAssignment3
+Click Clone
+
+**When you make changes...**
+git pull origin main  # Always pull latest changes first
+git add .
+git commit -m "Describe what you changed"
+git push origin main
 
 
