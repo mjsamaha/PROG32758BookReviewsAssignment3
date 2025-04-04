@@ -11,4 +11,10 @@ public class BookController {
     public String index() {
         return "index";
     }
+
+    // mapping to add a book
+
+
+
+
 }
