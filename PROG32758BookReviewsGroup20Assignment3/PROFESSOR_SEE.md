@@ -23,10 +23,10 @@ IntelliJ and go to File → New → Project from Version Control.
 Paste the repository URL: https://github.com/mjsamaha/PROG32758BookReviewsAssignment3
 Click Clone
 
-**When you make changes...**
-git pull origin main  # Always pull latest changes first
-git add .
-git commit -m "Describe what you changed"
-git push origin main
+**When you make changes... (commands)**
+- git pull origin main  
+- git add .
+- git commit -m "Describe what you changed"
+- git push origin main
 
 
