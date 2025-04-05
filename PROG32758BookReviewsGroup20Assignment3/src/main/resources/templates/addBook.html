@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Add a Book</h1>
+    <form th:action="@{/save}" th:object="${book}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <br>Name of Book:<label><input type="text" th:field="*{title}"></label>
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>
