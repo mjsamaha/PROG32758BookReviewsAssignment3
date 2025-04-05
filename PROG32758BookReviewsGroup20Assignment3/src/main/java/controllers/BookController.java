@@ -18,6 +18,53 @@ public class BookController {
         this.reviewService = reviewService;
     }
 
+    /*
+        @RequestMapping("/books")
+        .getAllBooks()
+
+        Mapping to get all books
+
+        return "books.html"
+     */
+
+    /*
+        @RequestMapping("/books/{id}")
+        .getBookById(id).orElse(null);
+
+        Mapping to get book by id
+
+        return "bookDetails.html" --> change later to go with AJAX/JS
+     */
+
+    /*
+        @RequestMapping("/addBook")
+        addBook
+
+        Mapping to add a book using form
+
+        return back to index page
+     */
+
+    /*
+        @RequestMapping("/save")
+        saveBook
+
+        Mapping to save a newly created book
+
+        redirect back to index
+     */
+
+    /*
+        @RequestMapping("/deleteBook/{id}")
+        deleteBook
+
+        Mapping to delete a book by its ID
+
+        return back to index page
+     */
+
+
+
 
 
 
