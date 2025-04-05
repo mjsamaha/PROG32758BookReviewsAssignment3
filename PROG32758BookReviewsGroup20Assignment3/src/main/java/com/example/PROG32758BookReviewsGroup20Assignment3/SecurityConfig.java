@@ -57,12 +57,18 @@ public class SecurityConfig {
 
         http.exceptionHandling(x -> x.accessDeniedPage("/denied"));
 
+        /*
+            now the /route requires auth correctly, users prompt login, users use the same credentials to access h2-console
+         */
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/everyone").permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers("/everyone").permitAll() // this route stays public
+                        .anyRequest().authenticated()) // now even "/" will require login
                 .httpBasic(withDefaults())
-                .formLogin(withDefaults());
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/", true) // always redirect to index after login
+                        .permitAll()
+                );
         http.csrf((csrf) -> csrf.disable());
         http.headers((headers) -> headers.frameOptions((frame) -> frame.sameOrigin()));
 

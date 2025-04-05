@@ -35,15 +35,12 @@ public class MyUserDetails implements UserDetails {
         return List.of(authority);
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    // removed, no need to encode again...
 
-    // encode password
     @Override
     public String getPassword(){
-        return passwordEncoder().encode(password);
+        // return the stored (already stored encoded) password
+        return password;
     }
 
     @Override
