@@ -6,6 +6,7 @@
 </head>
 <body>
     <h1>Add a Book</h1>
+    <!-- red squiggly lines now, since we haven't add any mapping rules in the Controllers -->
     <form th:action="@{/save}" th:object="${book}" method="post">
         <input type="hidden" th:field="*{id}">
         <br>Name of Book:<label><input type="text" th:field="*{title}"></label>
