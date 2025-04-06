@@ -36,14 +36,14 @@ public class BookController {
     public String viewBooks(Model model){
         List<Book> books = bookService.getAllBooks();
         model.addAttribute("books", books);
-        return "books";
+        return "books/list";
     }
 
-    // Serve "Add a Book form, restricted to auth users
+    // Serve "Add a Book form", restricted to auth users
     @GetMapping("/add")
     public String addBook(Model model){
         model.addAttribute("book", new Book());
-        return "books/add";
+        return "addBook";
     }
 
     // Handle form submission for adding a book
