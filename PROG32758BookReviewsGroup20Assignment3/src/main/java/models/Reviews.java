@@ -15,7 +15,10 @@ import lombok.NoArgsConstructor;
 public class Reviews {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private int bookId;
-    private String review;
+    private Long id;
+    // change from int to long for compatability
+    private Long bookId; // FK linking review to specific book
+    // Sahil added new properties that were missing
+    private String comment;
+    private String reviewer;
 }

@@ -61,14 +61,17 @@ public class SecurityConfig {
             now the /route requires auth correctly, users prompt login, users use the same credentials to access h2-console
          */
         http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/books/add").authenticated() // Only authenticated users can access Add Book
                         .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/everyone").permitAll() // this route stays public
-                        .anyRequest().authenticated()) // now even "/" will require login
+                        .requestMatchers("/everyone").permitAll()
+                        .anyRequest().authenticated()
+                )
                 .httpBasic(withDefaults())
                 .formLogin(form -> form
-                        .defaultSuccessUrl("/", true) // always redirect to index after login
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 );
+
         http.csrf((csrf) -> csrf.disable());
         http.headers((headers) -> headers.frameOptions((frame) -> frame.sameOrigin()));
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<h2>Books List</h2>
+<ul>
+    <li th:each="book : ${books}">
+        <!-- Link to dynamically load book details and reviews -->
+        <a href="javascript:void(0);" th:text="${book.title}"
+           th:onclick="'loadBookDetails(' + ${book.id} + ');'">Book Title</a>
+        <!-- Button to add a review -->
+        <a th:href="@{/reviews/{bookId}/add(bookId=${book.id})}">Add Review</a>
+    </li>
+
+</ul>
+<!-- A placeholder to dynamically load book details and reviews -->
+<div id="book-details">
+    <p>Select a book to view details and reviews here.</p>
+</div>
+
+<!-- Option to go back to the home page -->
+<p><a th:href="@{'/'}" href="/">Go Back to Home</a></p>
+
+<!-- Script to handle asynchronous loading -->
+<script>
+    function loadBookDetails(bookId) {
+        fetch(`/reviews/${bookId}`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('book-details').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading book details:', error));
+    }
+</script>
+</body>
+</html>

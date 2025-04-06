@@ -23,6 +23,7 @@ public class BookService {
         return bookRepository.findByBookId(bookId);
     }
 
+    // Save book
     public void saveBook(Book book){
         bookRepository.save(book);
     }
@@ -31,6 +32,7 @@ public class BookService {
         return bookRepository.findById(id);
     }
 
+    // Optional deleteBook method
     public void deleteBookById(Long id){
         bookRepository.deleteById(id);
     }

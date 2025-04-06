@@ -16,13 +16,17 @@
     <hr>
     <h2>Book Reviews</h2>
     <!-- Link to add a book: title, author -->
+    <p><a th:href="@{/books/add}" href="/books/add">Click here to add a book</a></p>
 
-    <!-- list to view all books that have been made + link beside the book to add a review -->
+    <!-- Link to view all books that have been made -->
     <h3>View All Books</h3>
-    <ol>
+    <p><a th:href="@{/books}" href="/books">Click here to view all books</a></p>
 
-    </ol>
-    <!-- Once you click on a book link -- it should print out book details, plus review that it's on the book -->
+    <!-- Placeholder where book details or reviews will dynamically load -->
+    <div id="main-content">
+        <p>Select a link above to proceed.</p>
+    </div>
+
 
 </body>
 </html>
