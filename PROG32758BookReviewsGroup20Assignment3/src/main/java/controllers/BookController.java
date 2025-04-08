@@ -8,13 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import service.BookService;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/books")
+// Removed to ensure it's simple
 public class BookController {
 
     /*
@@ -32,29 +31,29 @@ public class BookController {
     }
 
     // View list of all books
-    @GetMapping
-    public String viewBooks(Model model){
+    @GetMapping("/books") // Simplified, directly maps to "/books"
+    public String viewBooks(Model model) {
         List<Book> books = bookService.getAllBooks();
         model.addAttribute("books", books);
-        return "list";
+        return "list"; // Corresponding to list.html in templates folder
     }
 
-    // Serve "Add a Book form", restricted to auth users
-    @GetMapping("/add")
-    public String addBook(Model model){
+
+    // Serve "Add a Book" form, restricted to authenticated users
+    @GetMapping("/addBook")
+    public String addBook(Model model) {
         model.addAttribute("book", new Book());
-        return "addBook";
+        return "addBook"; // Corresponding to addBook.html in templates folder
     }
 
     // Handle form submission for adding a book
-    @PostMapping("/save")
-    public String saveBook(@ModelAttribute ("book") Book book, Authentication authentication){
+    @PostMapping("/saveBook")
+    public String saveBook(@ModelAttribute("book") Book book, Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
-            return "redirect:/denied";
+            return "redirect:/denied"; // Redirect to "denied" if user is not authenticated
         }
-        bookService.saveBook(book); // Call service to save book
+        bookService.saveBook(book); // Save the book using the service
         return "redirect:/books"; // Redirect to the list of books
     }
-
 
 }

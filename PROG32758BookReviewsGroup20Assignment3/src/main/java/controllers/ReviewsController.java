@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import service.ReviewService;
 
 @Controller
-@RequestMapping("/reviews")
+// Removed to ensure it's simple
 public class ReviewsController {
 
     private final ReviewService reviewService;
@@ -19,17 +19,17 @@ public class ReviewsController {
     }
 
     // View reviews for a specific book
-    @GetMapping("/{bookId}")
+    @GetMapping("/reviews/{bookId}")
     public String viewReviews(@PathVariable Long bookId, Model model) {
         model.addAttribute("reviews", reviewService.getReviewsByBookId(bookId));
-        return "list"; // Return to reviews/template for listing reviews
+        return "list"; // Return the template for listing reviews
     }
 
     // Submit a review for a book
-    @PostMapping("/{bookId}/add")
+    @PostMapping("/reviews/{bookId}/add")
     public String addReview(@PathVariable Long bookId, @ModelAttribute("review") Reviews review) {
         reviewService.addReviewToBook(bookId, review);
-        return "redirect:/books"; // Redirect to books list after adding a review
+        return "redirect:/books"; // Redirect to the books list after adding a review
     }
 
 }

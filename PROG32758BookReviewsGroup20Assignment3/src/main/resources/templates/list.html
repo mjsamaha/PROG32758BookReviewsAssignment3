@@ -8,13 +8,11 @@
 <h2>Books List</h2>
 <ul>
     <li th:each="book : ${books}">
-        <!-- Link to dynamically load book details and reviews -->
-        <a href="javascript:void(0);" th:text="${book.title}"
-           th:onclick="'loadBookDetails(' + ${book.id} + ');'">Book Title</a>
-        <!-- Button to add a review -->
+        <a href="javascript:void(0);" th:text="${book.title}" th:onclick="'loadBookDetails(' + ${book.id} + ');'">Book Title</a>
         <a th:href="@{/reviews/{bookId}/add(bookId=${book.id})}">Add Review</a>
     </li>
 </ul>
+
 
 <!-- No books available message -->
 <!-- this is not required; but makes it so if they're are no books currently in them, it will show a message -->

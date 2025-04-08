@@ -11,10 +11,17 @@ public class WebConfig implements WebMvcConfigurer {
     The WebConfig will handle conflicts between static resources and controller mappings
     Ensures that /static/** resolves under /static/
      */
+    // https://stackoverflow.com/questions/24661289/spring-boot-not-serving-static-content
+
+    /*
+    Fix; since I removed the /books and /reviews from the controllers, there is no need for this class
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // Serve only static resources located in /static
         registry
-                .addResourceHandler("/static/**") // Example for static files
-                .addResourceLocations("classpath:/static/");
+                .addResourceHandler("/static/**")
+                .addResourceLocations("classpath:/static/")
+                .setCachePeriod(3600); // caching for static files
     }
 }

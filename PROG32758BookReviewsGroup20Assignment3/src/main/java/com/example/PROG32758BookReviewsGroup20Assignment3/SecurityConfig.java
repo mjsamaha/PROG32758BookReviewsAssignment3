@@ -59,17 +59,9 @@ public class SecurityConfig {
         http.exceptionHandling(x -> x.accessDeniedPage("/denied"));
 
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/books/add").authenticated()
+                        .requestMatchers("/addBook", "/saveBook").authenticated()
                         .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/everyone").permitAll()
-                        // DELETE BELOW AFTER DEBUGGING TO FOLLOW REQUIREMENTS
-                        /*
-                        Must be as:
-                        .requestMatchers("/books/add", "/admin").authenticated()
-                        .requestMatchers("/").permitAll()
-                        .anyRequest().permitAll()
-                         */
-                        .requestMatchers("/**").permitAll() // for debugging purposes, getting errors when I want to add books or list books
+                        .requestMatchers("/", "/static/**", "/books", "/reviews/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .formLogin(form -> form
@@ -82,7 +74,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // AuthenticationManager
+    // Auth manager
     @Bean
     public AuthenticationManager authenticationManager(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -91,4 +83,5 @@ public class SecurityConfig {
 
         return new ProviderManager(authenticationProvider);
     }
+
 }
