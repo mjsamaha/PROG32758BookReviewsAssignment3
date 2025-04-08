@@ -62,6 +62,14 @@ public class SecurityConfig {
                         .requestMatchers("/books/add").authenticated()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers("/everyone").permitAll()
+                        // DELETE BELOW AFTER DEBUGGING TO FOLLOW REQUIREMENTS
+                        /*
+                        Must be as:
+                        .requestMatchers("/books/add", "/admin").authenticated()
+                        .requestMatchers("/").permitAll()
+                        .anyRequest().permitAll()
+                         */
+                        .requestMatchers("/**").permitAll() // for debugging purposes, getting errors when I want to add books or list books
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .formLogin(form -> form
