@@ -36,7 +36,7 @@ public class BookController {
     public String viewBooks(Model model){
         List<Book> books = bookService.getAllBooks();
         model.addAttribute("books", books);
-        return "books/list";
+        return "list";
     }
 
     // Serve "Add a Book form", restricted to auth users

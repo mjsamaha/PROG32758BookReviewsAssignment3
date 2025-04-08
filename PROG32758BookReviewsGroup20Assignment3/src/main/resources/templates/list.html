@@ -14,12 +14,28 @@
         <!-- Button to add a review -->
         <a th:href="@{/reviews/{bookId}/add(bookId=${book.id})}">Add Review</a>
     </li>
-
 </ul>
+
+<!-- No books available message -->
+<!-- this is not required; but makes it so if they're are no books currently in them, it will show a message -->
+<p th:if="${#lists.isEmpty(books)}">No books available.</p>
+
+
 <!-- A placeholder to dynamically load book details and reviews -->
 <div id="book-details">
     <p>Select a book to view details and reviews here.</p>
 </div>
+
+<!-- Review Submission Form -->
+<!-- bellow the list view -->
+<h3>Submit a Review</h3>
+<form th:action="@{/reviews/{bookId}/add(bookId=${book.id})}" method="post" th:if="${!#lists.isEmpty(books)}">
+    <label>Review:</label>
+    <label>
+        <textarea name="reviewText" required></textarea>
+    </label>
+    <input type="submit" value="Submit Review">
+</form>
 
 <!-- Option to go back to the home page -->
 <p><a th:href="@{'/'}" href="/">Go Back to Home</a></p>

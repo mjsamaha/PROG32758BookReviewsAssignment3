@@ -22,7 +22,7 @@ public class ReviewsController {
     @GetMapping("/{bookId}")
     public String viewReviews(@PathVariable Long bookId, Model model) {
         model.addAttribute("reviews", reviewService.getReviewsByBookId(bookId));
-        return "reviews/list"; // Return to reviews/template for listing reviews
+        return "list"; // Return to reviews/template for listing reviews
     }
 
     // Submit a review for a book

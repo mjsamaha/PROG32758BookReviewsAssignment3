@@ -1,12 +1,22 @@
-package com.example.PROG32758BookReviewsGroup20Assignment3;
+package service;
 
 
+import data.UserDetailsRepository;
+import models.MyUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private UserDetailsRepository userRepository;
+
+    private final UserDetailsRepository userRepository;
+
+    // Constructor to inject UserDetailsRepository
+    public UserDetailsServiceImpl(UserDetailsRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

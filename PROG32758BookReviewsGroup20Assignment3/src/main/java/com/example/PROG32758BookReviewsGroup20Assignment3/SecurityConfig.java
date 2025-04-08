@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -23,6 +24,7 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
     /*
     User Creation: [matthew] [sahil] [sebastian] [guest]
@@ -54,40 +56,31 @@ public class SecurityConfig {
     // Authorization -- Security Filter Chain
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http.exceptionHandling(x -> x.accessDeniedPage("/denied"));
 
-        /*
-            now the /route requires auth correctly, users prompt login, users use the same credentials to access h2-console
-         */
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/books/add").authenticated() // Only authenticated users can access Add Book
+                        .requestMatchers("/books/add").authenticated()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers("/everyone").permitAll()
-                        .anyRequest().authenticated()
-                )
+                        .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .formLogin(form -> form
                         .defaultSuccessUrl("/", true)
-                        .permitAll()
-                );
+                        .permitAll());
 
-        http.csrf((csrf) -> csrf.disable());
-        http.headers((headers) -> headers.frameOptions((frame) -> frame.sameOrigin()));
+        http.csrf(csrf -> csrf.disable());
+        http.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
 
         return http.build();
     }
 
-
     // AuthenticationManager
     @Bean
-    public AuthenticationManager authenticationManager(){
+    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-
-        authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
 
-        ProviderManager providerManager = new ProviderManager(authenticationProvider);
-        return providerManager;
+        return new ProviderManager(authenticationProvider);
     }
 }
