@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import service.ReviewService;
 
-@Controller
+// @Controller
+// I was using @Controllers and not @RestControllers
 // Removed to ensure it's simple
+@Controller
 public class ReviewsController {
 
     private final ReviewService reviewService;

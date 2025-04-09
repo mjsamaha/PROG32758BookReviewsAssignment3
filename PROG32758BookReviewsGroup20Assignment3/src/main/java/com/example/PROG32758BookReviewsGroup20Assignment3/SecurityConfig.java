@@ -59,13 +59,13 @@ public class SecurityConfig {
         http.exceptionHandling(x -> x.accessDeniedPage("/denied"));
 
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/addBook", "/saveBook").authenticated()
+                        .requestMatchers("/books/add", "/saveBook").authenticated()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers("/", "/static/**", "/books", "/reviews/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .formLogin(form -> form
-                        .defaultSuccessUrl("/", true)
+                        .defaultSuccessUrl("/", false) // or true
                         .permitAll());
 
         http.csrf(csrf -> csrf.disable());
