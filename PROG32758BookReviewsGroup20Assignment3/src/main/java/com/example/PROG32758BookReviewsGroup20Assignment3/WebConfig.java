@@ -1,6 +1,7 @@
 package com.example.PROG32758BookReviewsGroup20Assignment3;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -24,4 +25,11 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/")
                 .setCachePeriod(3600); // caching for static files
     }
+
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        // Ensure controller paths take precedence over static resources
+        configurer.setUseTrailingSlashMatch(true);
+    }
+
 }

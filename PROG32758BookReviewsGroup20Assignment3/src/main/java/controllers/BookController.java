@@ -2,20 +2,18 @@ package controllers;
 
 import models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 import service.BookService;
 
-import java.util.List;
 @Controller//
 // I was using @Controllers and not @RestControllers
-
 // Removed to ensure it's simple
+@RequestMapping("/books")
 public class BookController {
 
     /*
@@ -33,14 +31,14 @@ public class BookController {
     }
 
     // View all books (public)
-    @GetMapping("/books")
+    @GetMapping // removed the ("books") for brevity
     public String viewBooks(Model model) {
         model.addAttribute("books", bookService.getAllBooks());
         return "list";
     }
 
     // Add book form (protected)
-    @GetMapping("/books/add")
+    @GetMapping("/add") // switched from books/add to just /add
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         return "addBook";
@@ -58,6 +56,10 @@ public class BookController {
         bookService.saveBook(book);
         return "redirect:/books";
     }
+
+    /*
+    I could add Spring features like @Valid and Binding result for validation...
+     */
 
 
 }

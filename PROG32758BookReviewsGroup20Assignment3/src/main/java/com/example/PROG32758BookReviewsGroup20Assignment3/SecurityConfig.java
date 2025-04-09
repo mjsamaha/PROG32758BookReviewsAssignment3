@@ -15,8 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -57,25 +55,39 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Simplified; disable CSRF for demo purposes
+                // CSRF configuration (disable it for APIs or H2 console access)
+                .csrf(csrf -> csrf.disable())
+                // Allow H2 console access (use proper security in production)
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
+                // Authorization rules
                 .authorizeHttpRequests(auth -> auth
                         // Public pages
-                        .requestMatchers("/", "/books", "/static/**").permitAll()
+                        .requestMatchers("/", "/books", "/resources/**").permitAll()
                         // Restricted pages
                         .requestMatchers("/books/add", "/saveBook").hasAnyRole("USER", "ADMIN")
+                        // All other pages require authentication
                         .anyRequest().authenticated()
                 )
-                // Use Spring's default login page
+                // Use Spring Security's default login page
                 .formLogin(form -> form
-                        .defaultSuccessUrl("/", true) // Redirects to previously requested page or home
+                        .defaultSuccessUrl("/", true) // Redirect to home or previously requested page
                         .permitAll()
                 )
-                .logout(logout -> logout.permitAll())
+                // Logout configuration
+                .logout(logout -> logout
+                        .logoutUrl("/logout") // Default logout URL
+                        .logoutSuccessUrl("/") // Redirect to home after logout
+                        .permitAll()
+                )
+                // Unauthorized access handling
                 .exceptionHandling(exception -> exception
-                        .accessDeniedPage("/denied")); // Unauthorized access to /denied
+                        .accessDeniedPage("/denied") // Redirect to custom 403 page
+                );
 
         return http.build();
     }
+
+
 
 
 

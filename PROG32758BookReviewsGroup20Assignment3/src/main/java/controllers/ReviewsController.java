@@ -11,6 +11,7 @@ import service.ReviewService;
 // I was using @Controllers and not @RestControllers
 // Removed to ensure it's simple
 @Controller
+@RequestMapping("/reviews")
 public class ReviewsController {
 
     private final ReviewService reviewService;

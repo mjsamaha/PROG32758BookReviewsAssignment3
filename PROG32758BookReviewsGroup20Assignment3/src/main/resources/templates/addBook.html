@@ -5,7 +5,7 @@
     <title>Add a Book</title>
 </head>
 <body>
-<form th:action="@{/saveBook}" th:object="${book}" method="post">
+<form th:action="@{/books/saveBook}" th:object="${book}" method="post">
     <label>Book Title:</label>
     <label>
         <input type="text" th:field="*{title}" placeholder="Enter title" required>
