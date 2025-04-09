@@ -50,6 +50,11 @@ public class BookController {
     // Save book (protected)
     @PostMapping("/saveBook")
     public String saveBook(@ModelAttribute("book") Book book) {
+        if (book == null) {
+            // Log an error or throw an exception
+            System.out.println("Book object is null!");
+            return "error"; // Redirect to an error page or handle accordingly
+        }
         bookService.saveBook(book);
         return "redirect:/books";
     }
