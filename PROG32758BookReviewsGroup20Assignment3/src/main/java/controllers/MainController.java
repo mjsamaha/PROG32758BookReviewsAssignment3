@@ -14,14 +14,10 @@ public class MainController {
         return "index";
     }
 
+
     @RequestMapping("/denied")
     public String denied() {
         return "denied";
-    }
-
-    @RequestMapping("/error")
-    public String error() {
-        return "error";
     }
 
     // implement route

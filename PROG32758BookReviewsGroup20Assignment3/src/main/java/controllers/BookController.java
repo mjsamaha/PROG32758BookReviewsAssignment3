@@ -32,25 +32,27 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    // View list of all books
-    @GetMapping("/books") // Maps to "/books"
+    // View all books (public)
+    @GetMapping("/books")
     public String viewBooks(Model model) {
-        List<Book> books = bookService.getAllBooks();
-        model.addAttribute("books", books);
-        return "list"; // Corresponding to list.html in templates folder
+        model.addAttribute("books", bookService.getAllBooks());
+        return "list";
     }
 
-    // Serve "Add a Book" form, restricted to authenticated users
-    @GetMapping("/books/add") // Prefer structured route
-    public String addBookForm(Model model) {
-        model.addAttribute("book", new Book()); // Provide an empty Book object
-        return "addBook"; // Render addBook.html
+    // Add book form (protected)
+    @GetMapping("/books/add")
+    public String addBook(Model model) {
+        model.addAttribute("book", new Book());
+        return "addBook";
     }
 
-    // Handle form submission for adding a book
+
+    // Save book (protected)
     @PostMapping("/saveBook")
     public String saveBook(@ModelAttribute("book") Book book) {
-        bookService.saveBook(book); // Save the book using a service
-        return "redirect:/books"; // Redirect to the books list after saving
+        bookService.saveBook(book);
+        return "redirect:/books";
     }
+
+
 }

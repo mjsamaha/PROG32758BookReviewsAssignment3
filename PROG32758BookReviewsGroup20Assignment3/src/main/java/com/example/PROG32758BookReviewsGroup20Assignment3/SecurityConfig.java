@@ -56,23 +56,30 @@ public class SecurityConfig {
     // Authorization -- Security Filter Chain
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.exceptionHandling(x -> x.accessDeniedPage("/denied"));
-
-        http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/books/add", "/saveBook").authenticated()
-                        .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/", "/static/**", "/books", "/reviews/**").permitAll()
-                        .anyRequest().authenticated())
-                .httpBasic(withDefaults())
+        http
+                .csrf(csrf -> csrf.disable()) // Simplified; disable CSRF for demo purposes
+                .authorizeHttpRequests(auth -> auth
+                        // Public pages
+                        .requestMatchers("/", "/books", "/static/**").permitAll()
+                        // Restricted pages
+                        .requestMatchers("/books/add", "/saveBook").hasAnyRole("USER", "ADMIN")
+                        .anyRequest().authenticated()
+                )
+                // Use Spring's default login page
                 .formLogin(form -> form
-                        .defaultSuccessUrl("/", false) // or true
-                        .permitAll());
-
-        http.csrf(csrf -> csrf.disable());
-        http.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
+                        .defaultSuccessUrl("/", true) // Redirects to previously requested page or home
+                        .permitAll()
+                )
+                .logout(logout -> logout.permitAll())
+                .exceptionHandling(exception -> exception
+                        .accessDeniedPage("/denied")); // Unauthorized access to /denied
 
         return http.build();
     }
+
+
+
+
 
     // Auth manager
     @Bean
@@ -83,5 +90,6 @@ public class SecurityConfig {
 
         return new ProviderManager(authenticationProvider);
     }
+
 
 }
