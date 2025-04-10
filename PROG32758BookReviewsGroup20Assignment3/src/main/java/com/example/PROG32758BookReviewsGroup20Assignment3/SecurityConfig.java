@@ -55,7 +55,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // CSRF configuration (disable it for APIs or H2 console access)
+
                 .csrf(csrf -> csrf.disable())
                 // Allow H2 console access (use proper security in production)
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
@@ -84,14 +84,14 @@ public class SecurityConfig {
                         .accessDeniedPage("/denied") // Redirect to custom 403 page
                 );
 
+
+        // NEVER HAD THIS LINE implemented into the code -- maybe this fixes my mapping errors
+        /*
+        http.csrf((csrf) -> csrf.disable());
+        http.headers((headers) -> headers.frameOptions((frame) -> frame.sameOrigin()));
+        */
         return http.build();
     }
-
-
-
-
-
-
 
     // Auth manager
     @Bean

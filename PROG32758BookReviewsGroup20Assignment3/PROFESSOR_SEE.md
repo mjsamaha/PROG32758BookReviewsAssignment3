@@ -16,12 +16,6 @@ Link:https://github.com/mjsamaha/PROG32758BookReviewsAssignment3
 - H2 Database
 - Rest Repositories
 
-
-
-
-
-
-
 ## Setup for team
 IntelliJ and go to File → New → Project from Version Control.
 Paste the repository URL: https://github.com/mjsamaha/PROG32758BookReviewsAssignment3
@@ -32,5 +26,7 @@ Click Clone
 - git add .
 - git commit -m "Describe what you changed"
 - git push origin main
+
+
 
 
