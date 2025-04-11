@@ -1,7 +1,7 @@
-package service;
+package com.example.PROG32758BookReviewsGroup20Assignment3.service;
 
-import data.BookRepository;
-import models.Book;
+import com.example.PROG32758BookReviewsGroup20Assignment3.data.BookRepository;
+import com.example.PROG32758BookReviewsGroup20Assignment3.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +18,17 @@ public class BookService {
         return (List<Book>) bookRepository.findAll();
     }
 
-    // fetch books based on Author's bookId
-    public List<Book> findByBookId(Long bookId){
-        return bookRepository.findByBookId(bookId);
-    }
+//    // fetch books based on Author's bookId
+//    public List<Book> findByBookId(Long bookId){
+//        return bookRepository.findByBookId(bookId);
+//    }
 
     // Save book
     public void saveBook(Book book){
         bookRepository.save(book);
     }
+
+
 
     public Optional<Book> getBookById(Long id){
         return bookRepository.findById(id);

@@ -37,10 +37,10 @@ public class SecurityConfig {
                 .roles("ADMIN")
                 .build();
 
-        // UserDetails for sahil
+        // UserDetails for sahil: added by
 
 
-        // UserDetails for sebastian
+        // UserDetails for sebastian: added by
 
         UserDetails guest = User.withUsername("guest")
                 .password(passwordEncoder().encode("pass"))
@@ -65,6 +65,7 @@ public class SecurityConfig {
                         .requestMatchers("/", "/books", "/resources/**").permitAll()
                         // Restricted pages
                         .requestMatchers("/books/add", "/saveBook").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/books/view", "/deleteBook").hasRole("ADMIN")
                         // All other pages require authentication
                         .anyRequest().authenticated()
                 )

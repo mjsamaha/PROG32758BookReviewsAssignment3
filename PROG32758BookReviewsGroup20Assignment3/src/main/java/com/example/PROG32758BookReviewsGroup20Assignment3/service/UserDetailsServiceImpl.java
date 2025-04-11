@@ -1,8 +1,8 @@
-package service;
+package com.example.PROG32758BookReviewsGroup20Assignment3.service;
 
 
-import data.UserDetailsRepository;
-import models.MyUserDetails;
+import com.example.PROG32758BookReviewsGroup20Assignment3.data.UserDetailsRepository;
+import com.example.PROG32758BookReviewsGroup20Assignment3.models.MyUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

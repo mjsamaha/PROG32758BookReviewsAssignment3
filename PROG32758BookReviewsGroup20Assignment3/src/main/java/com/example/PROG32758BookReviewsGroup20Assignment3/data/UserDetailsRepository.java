@@ -1,6 +1,6 @@
-package data;
+package com.example.PROG32758BookReviewsGroup20Assignment3.data;
 
-import models.MyUserDetails;
+import com.example.PROG32758BookReviewsGroup20Assignment3.models.MyUserDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

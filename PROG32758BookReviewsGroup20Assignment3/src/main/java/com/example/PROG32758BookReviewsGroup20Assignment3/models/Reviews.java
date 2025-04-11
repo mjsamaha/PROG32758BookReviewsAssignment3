@@ -1,4 +1,4 @@
-package models;
+package com.example.PROG32758BookReviewsGroup20Assignment3.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

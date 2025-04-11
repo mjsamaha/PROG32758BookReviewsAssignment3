@@ -1,6 +1,6 @@
-package data;
+package com.example.PROG32758BookReviewsGroup20Assignment3.data;
 
-import models.Reviews;
+import com.example.PROG32758BookReviewsGroup20Assignment3.models.Reviews;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

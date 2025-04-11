@@ -1,7 +1,7 @@
-package service;
+package com.example.PROG32758BookReviewsGroup20Assignment3.service;
 
-import data.ReviewsRepository;
-import models.Reviews;
+import com.example.PROG32758BookReviewsGroup20Assignment3.data.ReviewsRepository;
+import com.example.PROG32758BookReviewsGroup20Assignment3.models.Reviews;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

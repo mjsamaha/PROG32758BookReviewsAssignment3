@@ -1,11 +1,11 @@
-package controllers;
+package com.example.PROG32758BookReviewsGroup20Assignment3.controllers;
 
-import models.Reviews;
+import com.example.PROG32758BookReviewsGroup20Assignment3.models.Reviews;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import service.ReviewService;
+import com.example.PROG32758BookReviewsGroup20Assignment3.service.ReviewService;
 
 
 @Controller
@@ -30,7 +30,7 @@ public class ReviewsController {
     @PostMapping("/{bookId}/add")
     public String addReview(@PathVariable Long bookId, @ModelAttribute("review") Reviews review) {
         reviewService.addReviewToBook(bookId, review);
-        return "redirect:/books"; // Redirect to the books list after adding a review
+        return "redirect:/list"; // Redirect to the books list after adding a review
     }
 
 }

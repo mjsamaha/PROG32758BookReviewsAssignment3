@@ -1,6 +1,6 @@
-package controllers;
+package com.example.PROG32758BookReviewsGroup20Assignment3.controllers;
 
-import models.Book;
+import com.example.PROG32758BookReviewsGroup20Assignment3.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import service.BookService;
+import com.example.PROG32758BookReviewsGroup20Assignment3.service.BookService;
 
 @Controller//
 @RequestMapping("/books")
@@ -54,7 +54,7 @@ public class BookController {
             return "error"; // Redirect to an error page or handle accordingly
         }
         bookService.saveBook(book);
-        return "redirect:/books/view"; // changed; correct mapping to view books
+        return "list"; // changed; correct mapping to view books
     }
 
     /*

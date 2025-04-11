@@ -1,4 +1,4 @@
-package controllers;
+package com.example.PROG32758BookReviewsGroup20Assignment3.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
