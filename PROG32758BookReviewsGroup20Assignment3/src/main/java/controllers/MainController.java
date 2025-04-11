@@ -4,8 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-// @Controller
-// I was using @Controllers and not @RestControllers
+
 @Controller
 public class MainController {
     @RequestMapping("/")
@@ -19,7 +18,7 @@ public class MainController {
         return "denied";
     }
 
-    // implement route
+    // implement route for admin
     @RequestMapping("/admin")
     public String admin(Model model) {
         model.addAttribute("message", "Hello Admin User");

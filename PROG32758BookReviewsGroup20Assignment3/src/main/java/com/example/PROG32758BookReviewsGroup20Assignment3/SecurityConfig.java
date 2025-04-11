@@ -61,7 +61,7 @@ public class SecurityConfig {
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 // Authorization rules
                 .authorizeHttpRequests(auth -> auth
-                        // Public pages
+                        // restrict access until user authenticates with login
                         .requestMatchers("/", "/books", "/resources/**").permitAll()
                         // Restricted pages
                         .requestMatchers("/books/add", "/saveBook").hasAnyRole("USER", "ADMIN")

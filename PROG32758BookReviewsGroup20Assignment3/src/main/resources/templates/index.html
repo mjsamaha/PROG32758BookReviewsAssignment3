@@ -15,11 +15,11 @@
 
     <hr>
     <h3>Add a Book</h3>
-    <a href="/books/add">Add a Book</a>
+    <a th:href="@{/books/add}">Add a Book</a>
     <!-- if I add the form inside index -- I get an error, I'm directed to the error page -->
 
     <h3>View All Books</h3>
-    <a href="/books">View Books</a>
+    <a th:href="@{/books/view}">View Books</a>
 
     <!-- Placeholder where book details or reviews will dynamically load -->
     <div id="main-content">
