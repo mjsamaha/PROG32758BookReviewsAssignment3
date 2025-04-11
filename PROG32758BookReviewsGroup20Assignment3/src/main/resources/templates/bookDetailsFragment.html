@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Book Details -->
+<div>
+  <h3 th:text="${book.title}">Book Title</h3>
+  <p><strong>Authors:</strong> <span th:text="${book.authors}"></span></p>
+</div>
+
+<!-- Reviews Section -->
+<div>
+  <h4>Reviews:</h4>
+  <ul>
+    <li th:each="review : ${reviews}">
+      <p><strong>Reviewer:</strong> <span th:text="${review.reviewer}">Reviewer Name</span></p>
+      <p><strong>Comment:</strong> <span th:text="${review.comment}">Review Content</span></p>
+    </li>
+  </ul>
+  <div th:if="${#lists.isEmpty(reviews)}">
+    <p>No reviews available for this book.</p>
+  </div>
+</div>
+
+<!-- Add a Review -->
+<div>
+  <h4>Add a Review:</h4>
+  <form th:action="@{/reviews/{bookId}/add(bookId=${book.id})}" method="post">
+    <label for="reviewer">Reviewer Name:</label>
+    <input type="text" id="reviewer" name="reviewer" placeholder="Your Name" required />
+    <br><br>
+    <label for="comment">Your Review:</label>
+    <textarea id="comment" name="comment" placeholder="Write your review here..." required></textarea>
+    <br><br>
+    <button type="submit">Submit Review</button>
+  </form>
+</div>
+</body>
+</html>

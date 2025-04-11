@@ -16,43 +16,37 @@
         <td th:text="${book.id}"></td>
         <td th:text="${book.title}"></td>
         <td>
-            <!-- add a review per each book -->
-            <!-- @PostMapping("/{bookId}/add") -->
-            <a th:href="@{/reviews/{bookId}/add(bookId=${book.id})}">Add Review</a>
-            <a th:href="@{/reviews/{bookId}(bookId=${book.id})}">View Reviews</a>
+            <!-- Button to view reviews dynamically -->
+            <button th:onclick="'getBookReviews(' + ${book.id} + ')'">View Reviews</button>
         </td>
     </tr>
-    <!-- add links beside each book iteration to add a review for that book -->
-    <!-- view list of books - with review -->
 </table>
 
+<!-- Placeholder for dynamically loaded reviews -->
+<div id="bookDetails">
+    <p>Select a book to see its details and reviews.</p>
+</div>
 
-<!-- Review Submission Form -- deleted no use -->
-<!-- bellow the list view -->
-<!--
-<h3>Submit a Review</h3>
-<form th:action="@{/reviews/{bookId}/add(bookId=${book.id})}" method="post" th:if="${!#lists.isEmpty(books)}">
-    <label>Review:</label>
-    <label>
-        <textarea name="reviewText" required></textarea>
-    </label>
-    <input type="submit" value="Submit Review">
-</form>
--->
 
-<!-- Back to home page -->
-<a href="/">Back to Home</a>
-
-<!-- Script to handle asynchronous loading -->
+<!-- Script to handle fetching and inserting the fragment -->
 <script>
-    function loadBookDetails(bookId) {
-        fetch(`/reviews/${bookId}`)
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('book-details').innerHTML = data;
+    function getBookReviews(bookId) {
+        // Fetch fragment for book details and reviews
+        fetch(`/reviews/${bookId}/fragment`)
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to load book details.");
+                return response.text(); // Get the fragment content as plain HTML
             })
-            .catch(error => console.error('Error loading book details:', error));
+            .then(function(fragment) {
+                // Inject the response fragment into placeholder
+                document.getElementById("bookDetails").innerHTML = fragment;
+            })
+            .catch(function(error) {
+                console.error("Error fetching book reviews:", error);
+            });
     }
 </script>
+
+<a href="/">Back to Home</a>
 </body>
 </html>
