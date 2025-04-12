@@ -38,9 +38,16 @@ public class SecurityConfig {
                 .build();
 
         // UserDetails for sahil: added by
-
+        UserDetails sahil = User.withUsername("sahil")
+                .password(passwordEncoder().encode("pass"))
+                .roles("ADMIN")
+                .build();
 
         // UserDetails for sebastian: added by
+        UserDetails sebastian = User.withUsername("sebastian")
+                .password(passwordEncoder().encode("pass"))
+                .roles("ADMIN")
+                .build();
 
         UserDetails guest = User.withUsername("guest")
                 .password(passwordEncoder().encode("pass"))
@@ -48,7 +55,7 @@ public class SecurityConfig {
                 .build();
 
         // once you add userDetails, you need to return new matthew, sahil, sebastian, etc.
-        return new InMemoryUserDetailsManager(matthew, guest);
+        return new InMemoryUserDetailsManager(matthew, guest, sahil, sebastian);
     }
 
     // Authorization -- Security Filter Chain

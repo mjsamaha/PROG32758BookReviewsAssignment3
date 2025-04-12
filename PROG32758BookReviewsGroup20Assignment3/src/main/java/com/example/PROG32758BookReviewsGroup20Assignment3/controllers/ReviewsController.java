@@ -42,6 +42,6 @@ public class ReviewsController {
     public String addReview(@PathVariable Long bookId, @ModelAttribute("review") Reviews review) {
         reviewService.addReviewToBook(bookId, review); // Link and save the review
         // Redirecting back to the list since dynamic reloading isn't handled here
-        return "redirect:/books/view"; // Redirects to the books list
+        return "redirect:/books/view"; // Redirects to the books list, straight back, not index
     }
 }
