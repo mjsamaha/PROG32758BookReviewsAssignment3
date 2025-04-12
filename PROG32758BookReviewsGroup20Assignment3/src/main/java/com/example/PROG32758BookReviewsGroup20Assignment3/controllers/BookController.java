@@ -44,7 +44,6 @@ public class BookController {
         return "addBook";
     }
 
-
     // Save book (protected)
     @PostMapping("/saveBook")
     public String saveBook(@ModelAttribute("book") Book book) {
@@ -56,8 +55,4 @@ public class BookController {
         bookService.saveBook(book);
         return "redirect:/"; // changed; correct mapping to view index
     }
-
-
-
-
 }

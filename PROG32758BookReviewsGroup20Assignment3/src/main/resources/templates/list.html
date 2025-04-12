@@ -6,15 +6,18 @@
 </head>
 <body>
 <h2>Books List</h2>
+<!-- list books as a table -->
 <table>
     <tr>
         <th>ID</th>
         <th>Title</th>
         <th>Action</th>
     </tr>
+    <!-- iteration each book -->
     <tr th:each="book : ${books}">
         <td th:text="${book.id}"></td>
         <td th:text="${book.title}"></td>
+        <td th:text="${book.authors}"></td>
         <td>
             <!-- Button to view reviews dynamically -->
             <button th:onclick="'getBookReviews(' + ${book.id} + ')'">View Reviews</button>
@@ -31,7 +34,7 @@
 <!-- Script to handle fetching and inserting the fragment -->
 <script>
     function getBookReviews(bookId) {
-        // Fetch fragment for book details and reviews
+        // Fetch fragment for book details and reviews by it's ID
         fetch(`/reviews/${bookId}/fragment`)
             .then(response => {
                 if (!response.ok) throw new Error("Failed to load book details.");
